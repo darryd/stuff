@@ -7,15 +7,20 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 
+import com.koushikdutta.async.ByteBufferList;
+import com.koushikdutta.async.DataEmitter;
+import com.koushikdutta.async.callback.DataCallback;
 import com.koushikdutta.async.http.AsyncHttpClient;
 import com.koushikdutta.async.http.AsyncHttpGet;
 import com.koushikdutta.async.http.AsyncHttpRequest;
 import com.koushikdutta.async.http.AsyncHttpResponse;
+import com.koushikdutta.async.http.WebSocket;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -25,29 +30,37 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 public class MyActivity extends AppCompatActivity {
 
 
     public final static String EXTRA_MESSAGE = "com.darrydanzig.myfirstapp.MESSAGE";
 
+    public final static String TAG = "DARRY-TAG";
+
+
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        // Binding all the views.
+        ButterKnife.bind(this);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        setSupportActionBar(toolbar);
 
         final Intent intent = new Intent(this, DisplayMessageActivity.class);
 
+        //testThread(intent);
+    }
+
+    private void testThread(final Intent intent) {
         new Thread(new Runnable() {
 
             @Override
@@ -96,7 +109,7 @@ public class MyActivity extends AppCompatActivity {
                         message += "horse";
                     }
 
-                } catch (java.io.IOException e) {
+                } catch (IOException e) {
                 }
                 catch (Exception e) {
 
@@ -111,11 +124,17 @@ public class MyActivity extends AppCompatActivity {
         }).start();
     }
 
+
+    @OnClick(R.id.fab)
+    public void onFabClick(View view) {
+        Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show();
+    }
+
+
     /** Called when the user clicks the Send button */
-    public void sendMessage(View view) {
-
-
-
+    @OnClick(R.id.send)
+    public void sendMessage() {
 
         AsyncHttpGet asyncHttpGet = new AsyncHttpGet("http://fezela.net");
 
@@ -128,11 +147,11 @@ public class MyActivity extends AppCompatActivity {
                     e.printStackTrace();
                     return;
                 }
-                System.out.println("I got a string: " + result);
+                Log.d(TAG, "I got a string: " + result);
             }
         });
 
-        AsyncHttpClient.getDefaultInstance().websocket(get, "my-protocol", new WebSocketConnectCallback() {
+        AsyncHttpClient.getDefaultInstance().websocket(asyncHttpGet, "my-protocol", new AsyncHttpClient.WebSocketConnectCallback() {
             @Override
             public void onCompleted(Exception ex, WebSocket webSocket) {
                 if (ex != null) {
@@ -141,51 +160,21 @@ public class MyActivity extends AppCompatActivity {
                 }
                 webSocket.send("a string");
                 webSocket.send(new byte[10]);
-                webSocket.setStringCallback(new StringCallback() {
+                webSocket.setStringCallback(new WebSocket.StringCallback() {
+                    @Override
                     public void onStringAvailable(String s) {
-                        System.out.println("I got a string: " + s);
+                        Log.e(TAG, s);
                     }
                 });
                 webSocket.setDataCallback(new DataCallback() {
                     public void onDataAvailable(DataEmitter emitter, ByteBufferList byteBufferList) {
-                        System.out.println("I got some bytes!");
+                        Log.d(TAG, "I got some bytes!");
                         // note that this data has been read
                         byteBufferList.recycle();
                     }
                 });
             }
         });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /*
-
-    */
-
-
     }
 
     @Override

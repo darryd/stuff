@@ -7,14 +7,17 @@
     android:orientation="horizontal"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_my">
-    <EditText android:id="@+id/edit_message"
-        android:layout_weight="1"
+
+    <EditText
+        android:id="@+id/edit_message"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="@string/edit_message"/>
+        android:layout_weight="1"
+        android:hint="@string/edit_message" />
+
     <Button
+        android:id="@+id/send"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/button_send"
-        android:onClick="sendMessage"/>
+        android:text="@string/button_send" />
 </LinearLayout>
