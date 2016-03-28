@@ -1,5 +1,6 @@
 package com.darrydanzig.myfirstapp;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +10,9 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.koushikdutta.async.ByteBufferList;
 import com.koushikdutta.async.DataEmitter;
 import com.koushikdutta.async.callback.DataCallback;
@@ -18,6 +22,8 @@ import com.koushikdutta.async.http.AsyncHttpGet;
 import com.koushikdutta.async.http.AsyncHttpResponse;
 import com.koushikdutta.async.http.WebSocket;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import butterknife.Bind;
@@ -37,6 +43,11 @@ public class MyActivity extends AppCompatActivity {
 
     // Keeping a handle for future use.
     private Future<WebSocket> socket;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
 
 
     @Override
@@ -50,6 +61,9 @@ public class MyActivity extends AppCompatActivity {
         // Setup socket.
         initSocket();
         getCompetitions();
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     @OnClick(R.id.fab)
@@ -59,13 +73,14 @@ public class MyActivity extends AppCompatActivity {
     }
 
 
-    /** Called when the user clicks the Send button */
+    /**
+     * Called when the user clicks the Send button
+     */
     @OnClick(R.id.send)
     public void sendMessage() {
 
 
     }
-
 
 
     private void initSocket() {
@@ -102,26 +117,32 @@ public class MyActivity extends AppCompatActivity {
                     e.printStackTrace();
                     return;
                 }
-                System.out.println("I got a JSONObject: " + result);
+                Log.e(TAG, "I got a JSONObject: " + result);
+
+                try {
+                    Log.e(TAG, "Title: " + result.getString("title"));
+
+
+                    JSONArray competitions = result.getJSONArray("slams");
+
+                    int length = competitions.length();
+
+                    for (int i=0; i < length; i++) {
+
+                        JSONObject competition = competitions.getJSONObject(i);
+                        Log.e(TAG, competition.getString("title"));
+                    }
+
+                } catch (JSONException e1) {
+                    e1.printStackTrace();
+                }
+
+
             }
         });
 
 
-
-
     }
-
-    private void onJSONCompleted(Exception ex, AsyncHttpResponse response, JSONObject result) {
-        if (ex != null) {
-            ex.printStackTrace();
-            Log.e(TAG, "Exeception onCompleted. " + ex.getMessage());
-            return;
-        }
-
-        Log.e(TAG, "JSON recieved. " + result);
-
-    }
-
 
     private void onSocketCompleted(Exception ex, WebSocket webSocket) {
         if (ex != null) {
@@ -167,5 +188,45 @@ public class MyActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client.connect();
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "My Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app deep link URI is correct.
+                Uri.parse("android-app://com.darrydanzig.myfirstapp/http/host/path")
+        );
+        AppIndex.AppIndexApi.start(client, viewAction);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "My Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app deep link URI is correct.
+                Uri.parse("android-app://com.darrydanzig.myfirstapp/http/host/path")
+        );
+        AppIndex.AppIndexApi.end(client, viewAction);
+        client.disconnect();
     }
 }
