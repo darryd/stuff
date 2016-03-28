@@ -136,7 +136,7 @@ public class MyActivity extends AppCompatActivity {
     @OnClick(R.id.send)
     public void sendMessage() {
 
-        AsyncHttpGet asyncHttpGet = new AsyncHttpGet("http://fezela.net");
+        AsyncHttpGet asyncHttpGet = new AsyncHttpGet("https://vanslam.herokuapp.com");
 
         // url is the URL to download.
         AsyncHttpClient.getDefaultInstance().executeString(asyncHttpGet, new AsyncHttpClient.StringCallback() {
