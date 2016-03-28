@@ -8,4 +8,5 @@
 
 
     <string name="BASE_URL">https://vanslam.herokuapp.com</string>
+    <string name="URL_COMPETITIONS_JSON">https://vanslamlive.ca/welcome/competitions_json</string>
 </resources>

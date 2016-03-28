@@ -15,7 +15,10 @@ import com.koushikdutta.async.callback.DataCallback;
 import com.koushikdutta.async.future.Future;
 import com.koushikdutta.async.http.AsyncHttpClient;
 import com.koushikdutta.async.http.AsyncHttpGet;
+import com.koushikdutta.async.http.AsyncHttpResponse;
 import com.koushikdutta.async.http.WebSocket;
+
+import org.json.JSONObject;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -46,6 +49,7 @@ public class MyActivity extends AppCompatActivity {
 
         // Setup socket.
         initSocket();
+        getCompetitions();
     }
 
     @OnClick(R.id.fab)
@@ -62,6 +66,8 @@ public class MyActivity extends AppCompatActivity {
 
     }
 
+
+
     private void initSocket() {
         AsyncHttpClient instance = AsyncHttpClient.getDefaultInstance();
         AsyncHttpGet get = new AsyncHttpGet(getString(R.string.BASE_URL));
@@ -73,6 +79,49 @@ public class MyActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void getCompetitions() {
+        /*
+        AsyncHttpClient instance = AsyncHttpClient.getDefaultInstance();
+        AsyncHttpGet get = new AsyncHttpGet(getString(R.string.URL_COMPETITIONS_JSON));
+
+        instance.executeJSONObject()
+
+        instance.executeJSONObject(get,(e, response, result) -> {
+            onJSONCompleted(e, response, result);});
+        */
+
+        // url is the URL to download.
+        AsyncHttpGet url = new AsyncHttpGet(getString(R.string.URL_COMPETITIONS_JSON));
+
+        AsyncHttpClient.getDefaultInstance().executeJSONObject(url, new AsyncHttpClient.JSONObjectCallback() {
+            // Callback is invoked with any exceptions/errors, and the result, if available.
+            @Override
+            public void onCompleted(Exception e, AsyncHttpResponse response, JSONObject result) {
+                if (e != null) {
+                    e.printStackTrace();
+                    return;
+                }
+                System.out.println("I got a JSONObject: " + result);
+            }
+        });
+
+
+
+
+    }
+
+    private void onJSONCompleted(Exception ex, AsyncHttpResponse response, JSONObject result) {
+        if (ex != null) {
+            ex.printStackTrace();
+            Log.e(TAG, "Exeception onCompleted. " + ex.getMessage());
+            return;
+        }
+
+        Log.e(TAG, "JSON recieved. " + result);
+
+    }
+
 
     private void onSocketCompleted(Exception ex, WebSocket webSocket) {
         if (ex != null) {
