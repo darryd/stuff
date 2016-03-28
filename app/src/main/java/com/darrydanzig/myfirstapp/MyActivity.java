@@ -75,7 +75,7 @@ public class MyActivity extends AppCompatActivity {
 
                             while ((nextLine = reader.readLine()) != null) {
                                 stringBuilder.append(nextLine);
-                                System.out.println(nextLine);
+                                //System.out.println(nextLine);
                             }
 
                             message = stringBuilder.toString();
@@ -116,7 +116,8 @@ public class MyActivity extends AppCompatActivity {
 
 
 
-        AsyncHttpGet asyncHttpGet = new AsyncHttpGet("my_url.com/get");
+
+        AsyncHttpGet asyncHttpGet = new AsyncHttpGet("http://fezela.net");
 
         // url is the URL to download.
         AsyncHttpClient.getDefaultInstance().executeString(asyncHttpGet, new AsyncHttpClient.StringCallback() {
@@ -130,7 +131,56 @@ public class MyActivity extends AppCompatActivity {
                 System.out.println("I got a string: " + result);
             }
         });
-        
+
+        AsyncHttpClient.getDefaultInstance().websocket(get, "my-protocol", new WebSocketConnectCallback() {
+            @Override
+            public void onCompleted(Exception ex, WebSocket webSocket) {
+                if (ex != null) {
+                    ex.printStackTrace();
+                    return;
+                }
+                webSocket.send("a string");
+                webSocket.send(new byte[10]);
+                webSocket.setStringCallback(new StringCallback() {
+                    public void onStringAvailable(String s) {
+                        System.out.println("I got a string: " + s);
+                    }
+                });
+                webSocket.setDataCallback(new DataCallback() {
+                    public void onDataAvailable(DataEmitter emitter, ByteBufferList byteBufferList) {
+                        System.out.println("I got some bytes!");
+                        // note that this data has been read
+                        byteBufferList.recycle();
+                    }
+                });
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     /*
 
     */
