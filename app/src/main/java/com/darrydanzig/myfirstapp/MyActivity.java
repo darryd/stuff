@@ -1,6 +1,7 @@
 package com.darrydanzig.myfirstapp;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,6 +13,9 @@ import android.view.MenuItem;
 import android.widget.EditText;
 
 import com.koushikdutta.async.http.AsyncHttpClient;
+import com.koushikdutta.async.http.AsyncHttpGet;
+import com.koushikdutta.async.http.AsyncHttpRequest;
+import com.koushikdutta.async.http.AsyncHttpResponse;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -111,9 +115,11 @@ public class MyActivity extends AppCompatActivity {
     public void sendMessage(View view) {
 
 
-        /*
+
+        AsyncHttpGet asyncHttpGet = new AsyncHttpGet("my_url.com/get");
+
         // url is the URL to download.
-        AsyncHttpClient.getDefaultInstance().getString(url, new AsyncHttpClient.StringCallback() {
+        AsyncHttpClient.getDefaultInstance().executeString(asyncHttpGet, new AsyncHttpClient.StringCallback() {
             // Callback is invoked with any exceptions/errors, and the result, if available.
             @Override
             public void onCompleted(Exception e, AsyncHttpResponse response, String result) {
@@ -124,10 +130,7 @@ public class MyActivity extends AppCompatActivity {
                 System.out.println("I got a string: " + result);
             }
         });
-
-    */
-        AsyncHttpClient.getDefaultInstance();
-
+        
     /*
 
     */
