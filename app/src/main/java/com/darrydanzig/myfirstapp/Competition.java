@@ -1,5 +1,7 @@
 package com.darrydanzig.myfirstapp;
 
+import java.util.List;
+
 /**
  * Created by Darry on 29/03/16.
  */
@@ -28,6 +30,7 @@ public class Competition {
     private int event_number;
     private int num_judges;
     private boolean do_not_include_min_and_max_scores;
+    private List<Round> rounds;
 
     public String getTitle() {
         return title;
@@ -59,6 +62,17 @@ public class Competition {
 
     public void setDo_not_include_min_and_max_scores(boolean do_not_include_min_and_max_scores) {
         this.do_not_include_min_and_max_scores = do_not_include_min_and_max_scores;
+    }
+
+    @Override
+    public String toString() {
+        return "Competition{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", event_number=" + event_number +
+                ", num_judges=" + num_judges +
+                ", do_not_include_min_and_max_scores=" + do_not_include_min_and_max_scores +
+                '}';
     }
 
     public int getId() {

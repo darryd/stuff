@@ -35,6 +35,22 @@ public class Round {
     private int grace_time;
     private int num_places;
 
+    @Override
+    public String toString() {
+        return "Round{" +
+                "id=" + id +
+                ", round_number=" + round_number +
+                ", title='" + title + '\'' +
+                ", competition_id=" + competition_id +
+                ", num_poets=" + num_poets +
+                ", is_cumulative=" + is_cumulative +
+                ", are_poets_from_previous=" + are_poets_from_previous +
+                ", time_limit=" + time_limit +
+                ", grace_time=" + grace_time +
+                ", num_places=" + num_places +
+                '}';
+    }
+
     public int getId() {
         return id;
     }
