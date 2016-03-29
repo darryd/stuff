@@ -23,6 +23,7 @@ package com.darrydanzig.myfirstapp;
 
 public class Competition {
 
+    private int id;
     private String title;
     private int event_number;
     private int num_judges;
@@ -58,5 +59,13 @@ public class Competition {
 
     public void setDo_not_include_min_and_max_scores(boolean do_not_include_min_and_max_scores) {
         this.do_not_include_min_and_max_scores = do_not_include_min_and_max_scores;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
