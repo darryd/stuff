@@ -1,5 +1,7 @@
 package com.darrydanzig.myfirstapp;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
 
@@ -48,11 +50,12 @@ public class Performance {
         this.round_id = round_id;
     }
 
-    public List<Integer> getScores() {
+
+    public HashMap<Integer, Integer> getScores() {
         return scores;
     }
 
-    public void setScores(List<Integer> scores) {
+    public void setScores(HashMap<Integer, Integer> scores) {
         this.scores = scores;
     }
 
@@ -92,16 +95,41 @@ public class Performance {
         return total;
     }
 
-    public void setTotal(int total) {
-        this.total = total;
-    }
-
     public int getSubtotal() {
         return subtotal;
     }
 
-    public void setSubtotal(int subtotal) {
+
+    private void setSubtotal(int subtotal) {
         this.subtotal = subtotal;
+    }
+
+
+
+    private void setTotal(int total) {
+        this.total = total;
+    }
+
+
+    private void calculate() {
+
+
+    }
+
+    @Override
+    public String toString() {
+        return "Performance{" +
+                "id=" + id +
+                ", poet='" + poet + '\'' +
+                ", round_id=" + round_id +
+                ", scores=" + scores +
+                ", minutes=" + minutes +
+                ", seconds=" + seconds +
+                ", penalty=" + penalty +
+                ", prev=" + prev +
+                ", total=" + total +
+                ", subtotal=" + subtotal +
+                '}';
     }
 
     private int id;
@@ -109,7 +137,7 @@ public class Performance {
     private int round_id;
 
     // Scores are stored as an integer (actual score x 10)
-    private List<Integer> scores;
+    private HashMap<Integer, Integer> scores = new HashMap<Integer,Integer>();
     private int minutes;
     private int seconds;
     private int penalty;
@@ -118,4 +146,6 @@ public class Performance {
     // total and subtotal are ints (actual total x 10)
     private int total;
     private int subtotal;
+    private int rank;
+    private List<String> tied_with;
 }
