@@ -1,5 +1,8 @@
 package com.darrydanzig.myfirstapp;
 
+import java.util.HashMap;
+import java.util.List;
+
 /**
  * Created by Darry on 29/03/16.
  */
@@ -34,6 +37,8 @@ public class Round {
     private int time_limit;
     private int grace_time;
     private int num_places;
+
+    private HashMap<Integer, Performance> performances;
 
     @Override
     public String toString() {

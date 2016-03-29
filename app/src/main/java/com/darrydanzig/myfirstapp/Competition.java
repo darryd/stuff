@@ -52,6 +52,18 @@ public class Competition {
         return num_judges;
     }
 
+    @Override
+    public String toString() {
+        return "Competition{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", event_number=" + event_number +
+                ", num_judges=" + num_judges +
+                ", do_not_include_min_and_max_scores=" + do_not_include_min_and_max_scores +
+                ", rounds=" + rounds +
+                '}';
+    }
+
     public void setNum_judges(int num_judges) {
         this.num_judges = num_judges;
     }
@@ -62,17 +74,6 @@ public class Competition {
 
     public void setDo_not_include_min_and_max_scores(boolean do_not_include_min_and_max_scores) {
         this.do_not_include_min_and_max_scores = do_not_include_min_and_max_scores;
-    }
-
-    @Override
-    public String toString() {
-        return "Competition{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", event_number=" + event_number +
-                ", num_judges=" + num_judges +
-                ", do_not_include_min_and_max_scores=" + do_not_include_min_and_max_scores +
-                '}';
     }
 
     public int getId() {

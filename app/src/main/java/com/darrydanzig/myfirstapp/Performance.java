@@ -1,0 +1,121 @@
+package com.darrydanzig.myfirstapp;
+
+import java.util.Hashtable;
+import java.util.List;
+
+/**
+ * Created by Darry on 29/03/16.
+ */
+
+
+/*
+
+  create_table "performances", force: :cascade do |t|
+    t.integer  "poet_id"
+    t.integer  "round_id"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.integer  "minutes"
+    t.integer  "seconds"
+    t.float    "penalty"
+    t.integer  "previous_performance_id"
+  end
+
+
+ */
+public class Performance {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getPoet() {
+        return poet;
+    }
+
+    public void setPoet(String poet) {
+        this.poet = poet;
+    }
+
+    public int getRound_id() {
+        return round_id;
+    }
+
+    public void setRound_id(int round_id) {
+        this.round_id = round_id;
+    }
+
+    public List<Integer> getScores() {
+        return scores;
+    }
+
+    public void setScores(List<Integer> scores) {
+        this.scores = scores;
+    }
+
+    public int getMinutes() {
+        return minutes;
+    }
+
+    public void setMinutes(int minutes) {
+        this.minutes = minutes;
+    }
+
+    public int getSeconds() {
+        return seconds;
+    }
+
+    public void setSeconds(int seconds) {
+        this.seconds = seconds;
+    }
+
+    public int getPenalty() {
+        return penalty;
+    }
+
+    public void setPenalty(int penalty) {
+        this.penalty = penalty;
+    }
+
+    public Performance getPrev() {
+        return prev;
+    }
+
+    public void setPrev(Performance prev) {
+        this.prev = prev;
+    }
+
+    public int getTotal() {
+        return total;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
+    }
+
+    public int getSubtotal() {
+        return subtotal;
+    }
+
+    public void setSubtotal(int subtotal) {
+        this.subtotal = subtotal;
+    }
+
+    private int id;
+    private String poet;
+    private int round_id;
+
+    // Scores are stored as an integer (actual score x 10)
+    private List<Integer> scores;
+    private int minutes;
+    private int seconds;
+    private int penalty;
+    private Performance prev;
+
+    // total and subtotal are ints (actual total x 10)
+    private int total;
+    private int subtotal;
+}
