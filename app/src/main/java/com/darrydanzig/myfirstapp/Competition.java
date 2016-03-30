@@ -37,6 +37,8 @@ public class Competition {
 
     Round[] rounds;
 
+    Competition[] slams;
+
     @Override
     public String toString() {
         return App.getInstance().getGson().toJson(this, Competition.class);
