@@ -30,4 +30,7 @@ dependencies {
     // Butterknife for injection.
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'com.google.android.gms:play-services-appindexing:8.1.0'
+
+    // Gson for JSON parsing.
+    compile files('libs/gson-2.6.2.jar')
 }
