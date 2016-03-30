@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.darrydanzig.myfirstapp.App;
+import com.darrydanzig.myfirstapp.models.Judges;
 import com.darrydanzig.myfirstapp.models.Performance;
 import com.darrydanzig.myfirstapp.R;
 import com.darrydanzig.myfirstapp.models.VanSlam;
@@ -53,10 +54,18 @@ public class MyActivity extends AppCompatActivity {
 
             Log.e(TAG, "" + key + " : " + scores.get(key));
 
-
-
-
         }
+
+        Log.e(TAG, "Comparables");
+
+        Judges.MyComparable comparableMin = Judges.getMyCompareable(true);
+        Judges.MyComparable comparableMax = Judges.getMyCompareable(false);
+
+        Log.e(TAG, "1 < 2 : " + comparableMin.compare(1, 2));
+        Log.e(TAG, "2 > 1 : " + comparableMax.compare(2, 1));
+
+        Log.e(TAG, "1 > 2 : " + comparableMax.compare(1, 2));
+        Log.e(TAG, "2 < 1 : " + comparableMin.compare(2, 1));
 
     }
 
@@ -103,9 +112,6 @@ public class MyActivity extends AppCompatActivity {
         Performance performance = new Performance();
         Log.e(TAG, performance.toString());
 
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     private void initSocket() {
