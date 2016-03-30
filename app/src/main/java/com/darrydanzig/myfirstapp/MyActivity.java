@@ -4,12 +4,15 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.darrydanzig.myfirstapp.adapter.CompetitionAdapter;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -67,6 +70,9 @@ public class MyActivity extends AppCompatActivity {
     @Bind(R.id.toolbar)
     Toolbar toolbar;
 
+    @Bind(R.id.list)
+    RecyclerView list;
+
     // Keeping a handle for future use.
     private Future<WebSocket> socket;
     /**
@@ -84,6 +90,12 @@ public class MyActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
 
+
+        list.setLayoutManager( new LinearLayoutManager( this ) );
+
+
+
+
         // Setup socket.
         //initSocket();
         getCompetitions();
@@ -97,23 +109,6 @@ public class MyActivity extends AppCompatActivity {
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
-
-    @OnClick(R.id.fab)
-    public void onFabClick(View view) {
-        Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show();
-    }
-
-
-    /**
-     * Called when the user clicks the Send button
-     */
-    @OnClick(R.id.send)
-    public void sendMessage() {
-
-
-    }
-
 
     private void initSocket() {
         AsyncHttpClient instance = AsyncHttpClient.getDefaultInstance();
@@ -151,8 +146,18 @@ public class MyActivity extends AppCompatActivity {
                 }
                 Log.e(TAG, "I got a JSONObject: " + result.toString());
 
-                Competition competition1 = App.getInstance().getGson().fromJson(result.toString(), Competition.class);
+                final Competition competition1 = App.getInstance().getGson().fromJson(result.toString(), Competition.class);
                 Log.d(TAG, competition1.toString());
+
+                MyActivity.this.runOnUiThread(new Runnable() {
+                    public void run() {
+                        Log.d("UI thread", "I am the UI thread");
+                        CompetitionAdapter arrayAdapter = new CompetitionAdapter( MyActivity.this, competition1.slams );
+                        list.setAdapter( arrayAdapter );
+                    }
+                });
+
+
             }
         });
 

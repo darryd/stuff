@@ -27,8 +27,8 @@ import java.util.List;
 
 public class Competition {
 
-    int id;
-    String title;
+    public int id;
+    public String title;
     int eventNumber;
     int numJudges;
 
