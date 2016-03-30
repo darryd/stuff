@@ -39,7 +39,7 @@ public class Competition {
 
     @Override
     public String toString() {
-        return App.getInstance().getGson().toJson(this, Performance.class);
+        return App.getInstance().getGson().toJson(this, Competition.class);
     }
 
 }

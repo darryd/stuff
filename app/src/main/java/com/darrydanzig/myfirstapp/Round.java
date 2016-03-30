@@ -42,7 +42,7 @@ public class Round {
 
     @Override
     public String toString() {
-        return App.getInstance().getGson().toJson(this, Performance.class);
+        return App.getInstance().getGson().toJson(this, Round.class);
     }
 
 }
