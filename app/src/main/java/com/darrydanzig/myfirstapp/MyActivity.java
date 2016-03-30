@@ -86,7 +86,7 @@ public class MyActivity extends AppCompatActivity {
 
         // Setup socket.
         //initSocket();
-        //getCompetitions();
+        getCompetitions();
 
         experiment();
 
@@ -149,27 +149,10 @@ public class MyActivity extends AppCompatActivity {
                     e.printStackTrace();
                     return;
                 }
-                Log.e(TAG, "I got a JSONObject: " + result);
+                Log.e(TAG, "I got a JSONObject: " + result.toString());
 
-                try {
-                    Log.e(TAG, "Title: " + result.getString("title"));
-
-
-                    JSONArray competitions = result.getJSONArray("slams");
-
-                    int length = competitions.length();
-
-                    for (int i=0; i < length; i++) {
-
-                        JSONObject competition = competitions.getJSONObject(i);
-                        Log.e(TAG, competition.getString("title"));
-                    }
-
-                } catch (JSONException e1) {
-                    e1.printStackTrace();
-                }
-
-
+                Competition competition1 = App.getInstance().getGson().fromJson(result.toString(), Competition.class);
+                Log.d(TAG, competition1.toString());
             }
         });
 

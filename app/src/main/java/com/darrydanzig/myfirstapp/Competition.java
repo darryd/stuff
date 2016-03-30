@@ -1,5 +1,7 @@
 package com.darrydanzig.myfirstapp;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 /**
@@ -25,12 +27,15 @@ import java.util.List;
 
 public class Competition {
 
-    private int id;
-    private String title;
-    private int eventNumber;
-    private int numJudges;
-    private boolean doNotIncludeMinAndMaxScores;
-    private List<Round> rounds;
+    int id;
+    String title;
+    int eventNumber;
+    int numJudges;
+
+    @SerializedName("do_not_include_min_and_max_scores")
+    boolean includeMinMax;
+
+    Round[] rounds;
 
     @Override
     public String toString() {

@@ -27,16 +27,16 @@ import java.util.List;
  */
 public class Round {
 
-    private int id;
-    private int roundNumber;
-    private String title;
-    private int competitionId;
-    private int numPoets;
-    private boolean isCumulative;
-    private boolean arePoetsFromPrevious;
-    private int timeLimit;
-    private int graceTime;
-    private int numPlaces;
+    int id;
+    int roundNumber;
+    String title;
+    int competitionId;
+    int numPoets;
+    boolean isCumulative;
+    boolean arePoetsFromPrevious;
+    int timeLimit;
+    int graceTime;
+    int numPlaces;
 
     private HashMap<Integer, Performance> performances;
 
