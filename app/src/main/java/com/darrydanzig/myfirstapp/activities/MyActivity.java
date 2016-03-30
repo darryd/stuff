@@ -47,6 +47,7 @@ public class MyActivity extends AppCompatActivity {
 
         Log.e(TAG, "Comparables");
 
+        /*
         Judges.MyComparable comparableMin = Judges.getMyCompareable(true);
         Judges.MyComparable comparableMax = Judges.getMyCompareable(false);
 
@@ -55,7 +56,7 @@ public class MyActivity extends AppCompatActivity {
 
         Log.e(TAG, "1 > 2 : " + comparableMax.compare(1, 2));
         Log.e(TAG, "2 < 1 : " + comparableMin.compare(2, 1));
-
+        */
 
         for (int i=0; i<5; i++) {
 

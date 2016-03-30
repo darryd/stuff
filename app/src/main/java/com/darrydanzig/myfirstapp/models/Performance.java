@@ -41,7 +41,7 @@ public class Performance {
     int minutes;
     int seconds;
     int penalty;
-    Performance prev;
+    Performance prev; // From another round (sometimes scores are cumulative)
 
     // total and subtotal are ints (actual total x 10)
     int total;
