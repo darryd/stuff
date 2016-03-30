@@ -1,8 +1,7 @@
-package com.darrydanzig.myfirstapp;
+package com.darrydanzig.myfirstapp.models;
 
+import com.darrydanzig.myfirstapp.App;
 import com.google.gson.annotations.SerializedName;
-
-import java.util.List;
 
 /**
  * Created by Darry on 29/03/16.
@@ -37,7 +36,16 @@ public class Competition {
 
     Round[] rounds;
 
-    Competition[] slams;
+    public Competition() {
+        super();
+        // Default c-tor for gson
+
+        rounds = new Round[10];
+        for (int i = 0; i < 10; i++) {
+            rounds[i] = new Round();
+        }
+    }
+
 
     @Override
     public String toString() {

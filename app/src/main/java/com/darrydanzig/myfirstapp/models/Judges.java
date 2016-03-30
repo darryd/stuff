@@ -1,4 +1,4 @@
-package com.darrydanzig.myfirstapp;
+package com.darrydanzig.myfirstapp.models;
 
 import java.util.ArrayList;
 import java.util.HashMap;

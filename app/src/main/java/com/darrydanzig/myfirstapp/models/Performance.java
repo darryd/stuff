@@ -1,9 +1,11 @@
-package com.darrydanzig.myfirstapp;
+package com.darrydanzig.myfirstapp.models;
 
+import com.darrydanzig.myfirstapp.App;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by Darry on 29/03/16.
@@ -27,15 +29,15 @@ import java.util.List;
  */
 public class Performance {
 
-    int id;
-    String poet;
+    public int id;
+    public String poet;
     int roundId;
 
     @SerializedName("previous_performance_id")
     int previousId;
 
     // Scores are stored as an integer (actual score x 10)
-    HashMap<Integer, Integer> scores = new HashMap<Integer, Integer>();
+    public HashMap<Integer, Integer> scores = new HashMap<Integer, Integer>();
     int minutes;
     int seconds;
     int penalty;
@@ -44,8 +46,24 @@ public class Performance {
     // total and subtotal are ints (actual total x 10)
     int total;
     int subtotal;
-    int rank;
+    public int rank;
     List<String> tiedWith;
+
+    public Performance() {
+        super();
+        // Default c-tor for Gson
+    }
+
+    public Performance(int i) {
+        // Debug c-tor
+        id = i;
+        poet = "Poet Name";
+
+        for (int i1 = 0; i1 < 5; i1++) {
+            Random random = new Random();
+            scores.put(i1, random.nextInt(100) );
+        }
+    }
 
     @Override
     public String toString() {

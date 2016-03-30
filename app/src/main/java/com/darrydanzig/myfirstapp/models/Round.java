@@ -1,7 +1,8 @@
-package com.darrydanzig.myfirstapp;
+package com.darrydanzig.myfirstapp.models;
+
+import com.darrydanzig.myfirstapp.App;
 
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * Created by Darry on 29/03/16.
@@ -27,9 +28,9 @@ import java.util.List;
  */
 public class Round {
 
-    int id;
-    int roundNumber;
-    String title;
+    public int id;
+    public int roundNumber;
+    public String title;
     int competitionId;
     int numPoets;
     boolean isCumulative;
@@ -39,6 +40,23 @@ public class Round {
     int numPlaces;
 
     private HashMap<Integer, Performance> performances;
+
+    public Round() {
+        super();
+
+
+    }
+
+    public Round(int i) {
+        performances = new HashMap<>();
+
+        for (int t = 0; t < i; t++) {
+            performances.put(i, new Performance(i));
+        }
+
+        id = i;
+        title = "Round " + ( i + 1 );
+    }
 
     @Override
     public String toString() {
