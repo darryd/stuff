@@ -83,7 +83,7 @@ public class Judges<judge_key_type> {
         return comparable;
     }
 
-    private judge_key_type getKeyForMinOrMax(boolean isForMin, Set<judge_key_type> keys) {
+    public judge_key_type getKeyForMinOrMax(boolean isForMin, Set<judge_key_type> keys) {
 
         judge_key_type winnerKey = null;
         int winner = isForMin ? Integer.MAX_VALUE : Integer.MIN_VALUE;
@@ -106,13 +106,13 @@ public class Judges<judge_key_type> {
     private ArrayList<judge_key_type> getMaxMinKeys() {
 
         ArrayList<judge_key_type> keys = new ArrayList<judge_key_type>();
-        judge_key_type min_key, max_key;
+        judge_key_type minKey, maxKey;
 
-        min_key = getKeyForMinOrMax(true);
-        max_key = getKeyForMinOrMax(false, min_key);
+        minKey = getKeyForMinOrMax(true);
+        maxKey = getKeyForMinOrMax(false, minKey);
 
-        keys.add(min_key);
-        keys.add(max_key);
+        keys.add(minKey);
+        keys.add(maxKey);
 
         return keys;
     }
