@@ -41,20 +41,9 @@ public class MyActivity extends AppCompatActivity {
 
     public void experiment() {
 
-        HashMap<String, Integer> scores = new HashMap<String, Integer>();
-
-        for (int i=0; i<5; i++) {
-            scores.put("" + i, i);
-        }
+        Judges<String> judges = new Judges<String>();
 
 
-        Set<String> keys = scores.keySet();
-
-        for(String key : keys) {
-
-            Log.e(TAG, "" + key + " : " + scores.get(key));
-
-        }
 
         Log.e(TAG, "Comparables");
 
@@ -66,6 +55,20 @@ public class MyActivity extends AppCompatActivity {
 
         Log.e(TAG, "1 > 2 : " + comparableMax.compare(1, 2));
         Log.e(TAG, "2 < 1 : " + comparableMin.compare(2, 1));
+
+
+        for (int i=0; i<5; i++) {
+
+            Log.e(TAG, "" + i);
+            judges.setScore("" + i, i);
+        }
+
+
+        Log.e(TAG, "Total (with max and min) = " + judges.getTotal());
+        judges.doNotIncludeMaxMinScores = true;
+        Log.e(TAG, "Total (without max and min) = " + judges.getTotal());
+
+
 
     }
 

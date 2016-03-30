@@ -11,7 +11,7 @@ public class Judges<judge_key_type> {
 
 
     private HashMap<judge_key_type, Integer> scores = new HashMap<judge_key_type, Integer>();
-    private boolean do_not_include_max_min_scores;
+    public boolean doNotIncludeMaxMinScores;
 
     public void setScore(judge_key_type judgeKey, int score) {
         scores.put(judgeKey, score);
@@ -20,26 +20,33 @@ public class Judges<judge_key_type> {
     public int getTotal() {
 
         int total = 0;
+        ArrayList<judge_key_type> ignoreKeys = new ArrayList<judge_key_type>();
+
+        if (doNotIncludeMaxMinScores)
+            ignoreKeys = getMaxMinKeys();
+
+
+        Set<judge_key_type> keys = scores.keySet();
+        for (judge_key_type ignoreKey : ignoreKeys){
+            keys.remove(ignoreKey);
+        }
+
+        for (judge_key_type k : keys) total += scores.get(k);
 
         return total;
     }
 
 
     private judge_key_type getKeyForMinOrMax(boolean isForMin) {
-
-
-
-
-
-        return getKeyForMinOrMax(scores.keySet(), isForMin);
+        return getKeyForMinOrMax(isForMin, scores.keySet());
     }
 
-    private judge_key_type getKeyForMinOrMax(judge_key_type ignore, boolean isForMin) {
+    private judge_key_type getKeyForMinOrMax(boolean isForMin, judge_key_type ignore) {
 
         Set<judge_key_type> keys = scores.keySet();
         keys.remove(ignore);
 
-        return getKeyForMinOrMax(keys, isForMin);
+        return getKeyForMinOrMax(isForMin, keys);
     }
 
 
@@ -76,7 +83,7 @@ public class Judges<judge_key_type> {
         return comparable;
     }
 
-    private judge_key_type getKeyForMinOrMax(Set<judge_key_type> keys, boolean isForMin) {
+    private judge_key_type getKeyForMinOrMax(boolean isForMin, Set<judge_key_type> keys) {
 
         judge_key_type winnerKey = null;
         int winner = isForMin ? Integer.MAX_VALUE : Integer.MIN_VALUE;
@@ -98,14 +105,15 @@ public class Judges<judge_key_type> {
 
     private ArrayList<judge_key_type> getMaxMinKeys() {
 
-        ArrayList<judge_key_type> min_max_keys = new ArrayList<judge_key_type>();
+        ArrayList<judge_key_type> keys = new ArrayList<judge_key_type>();
+        judge_key_type min_key, max_key;
 
-        if (do_not_include_max_min_scores) {
+        min_key = getKeyForMinOrMax(true);
+        max_key = getKeyForMinOrMax(false, min_key);
 
-            // find the min and max
+        keys.add(min_key);
+        keys.add(max_key);
 
-        }
-
-        return min_max_keys;
+        return keys;
     }
 }
