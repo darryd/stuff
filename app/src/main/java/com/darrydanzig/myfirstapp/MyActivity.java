@@ -26,12 +26,34 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
+import java.util.Set;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MyActivity extends AppCompatActivity {
 
+
+    public void experiment() {
+
+        HashMap<String, Integer> scores = new HashMap<String, Integer>();
+
+        for (int i=0; i<5; i++) {
+            scores.put("" + i, i);
+        }
+
+
+        Set<String> keys = scores.keySet();
+
+        for(String key : keys) {
+
+            Log.e(TAG, "" + key + " : " + scores.get(key));
+
+        }
+
+    }
 
     public final static String EXTRA_MESSAGE = "com.darrydanzig.myfirstapp.MESSAGE";
 
@@ -59,8 +81,11 @@ public class MyActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         // Setup socket.
-        initSocket();
-        getCompetitions();
+        //initSocket();
+        //getCompetitions();
+
+        experiment();
+
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();

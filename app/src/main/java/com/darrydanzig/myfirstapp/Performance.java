@@ -99,20 +99,15 @@ public class Performance {
         return subtotal;
     }
 
-
     private void setSubtotal(int subtotal) {
         this.subtotal = subtotal;
     }
-
-
 
     private void setTotal(int total) {
         this.total = total;
     }
 
-
     private void calculate() {
-
 
     }
 
