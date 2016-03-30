@@ -52,6 +52,9 @@ public class MyActivity extends AppCompatActivity {
 
             Log.e(TAG, "" + key + " : " + scores.get(key));
 
+
+
+
         }
 
     }
