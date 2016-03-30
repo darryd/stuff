@@ -1,5 +1,7 @@
 package com.darrydanzig.myfirstapp;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.HashMap;
 import java.util.List;
 
@@ -29,6 +31,9 @@ public class Performance {
     String poet;
     int roundId;
 
+    @SerializedName("previous_performance_id")
+    int previousId;
+
     // Scores are stored as an integer (actual score x 10)
     HashMap<Integer, Integer> scores = new HashMap<Integer, Integer>();
     int minutes;
@@ -46,6 +51,4 @@ public class Performance {
     public String toString() {
         return App.getInstance().getGson().toJson(this, Performance.class);
     }
-
-
 }
