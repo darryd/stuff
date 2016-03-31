@@ -5,10 +5,16 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 
 import com.darrydanzig.myfirstapp.R;
 import com.darrydanzig.myfirstapp.models.Round;
 import com.darrydanzig.myfirstapp.adapter.RoundAdapter;
+import com.koushikdutta.async.http.AsyncHttpClient;
+import com.koushikdutta.async.http.AsyncHttpGet;
+import com.koushikdutta.async.http.AsyncHttpResponse;
+
+import org.json.JSONObject;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -39,5 +45,29 @@ public class CompletitionActivity extends Activity {
         list.setLayoutManager( new LinearLayoutManager( this ) );
         RoundAdapter arrayAdapter = new RoundAdapter( CompletitionActivity.this, rounds );
         list.setAdapter( arrayAdapter );
+    }
+
+    public final static String TAG = "DARRY-TAG";
+
+    private void getCompetition(int id) {
+
+        AsyncHttpGet url = new AsyncHttpGet(getString(R.string.BASE_URL)+ "/competition/show?json&id=" + id);
+
+        AsyncHttpClient.getDefaultInstance().executeJSONObject(url, new AsyncHttpClient.JSONObjectCallback() {
+            @Override
+            public void onCompleted(Exception e, AsyncHttpResponse source, JSONObject result) {
+                if (e != null) {
+                    e.printStackTrace();
+                    Log.e(TAG, "Exeception onCompleted. " + e.getMessage());
+                    return;
+                }
+
+
+                Log.e(TAG, "Competition json:");
+                Log.e(TAG, result.toString());
+            }
+        });
+
+
     }
 }

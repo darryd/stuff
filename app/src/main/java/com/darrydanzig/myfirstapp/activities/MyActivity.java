@@ -76,7 +76,7 @@ public class MyActivity extends AppCompatActivity {
 
 
 
-        getCompetition(2);
+        //getCompetition(2);
 
     }
 
@@ -178,27 +178,6 @@ public class MyActivity extends AppCompatActivity {
     }
 
 
-    private void getCompetition(int id) {
-
-        AsyncHttpGet url = new AsyncHttpGet(getString(R.string.BASE_URL)+ "/competition/show?json&id=" + id);
-
-        AsyncHttpClient.getDefaultInstance().executeJSONObject(url, new AsyncHttpClient.JSONObjectCallback() {
-            @Override
-            public void onCompleted(Exception e, AsyncHttpResponse source, JSONObject result) {
-                if (e != null) {
-                    e.printStackTrace();
-                    Log.e(TAG, "Exeception onCompleted. " + e.getMessage());
-                    return;
-                }
-
-
-                Log.e(TAG, "Competition json:");
-                Log.e(TAG, result.toString());
-            }
-        });
-
-
-    }
 
     private void onSocketCompleted(Exception ex, WebSocket webSocket) {
         if (ex != null) {

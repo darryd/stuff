@@ -5,10 +5,16 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 
 import com.darrydanzig.myfirstapp.models.Performance;
 import com.darrydanzig.myfirstapp.R;
 import com.darrydanzig.myfirstapp.adapter.PerformanceAdapter;
+import com.koushikdutta.async.http.AsyncHttpClient;
+import com.koushikdutta.async.http.AsyncHttpGet;
+import com.koushikdutta.async.http.AsyncHttpResponse;
+
+import org.json.JSONObject;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -23,6 +29,8 @@ public class PerformanceActivity extends Activity {
 
     @Bind(R.id.list)
     RecyclerView list;
+
+    public final static String TAG = "DARRY-TAG";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,5 +47,12 @@ public class PerformanceActivity extends Activity {
         list.setLayoutManager( new LinearLayoutManager( this ) );
         PerformanceAdapter arrayAdapter = new PerformanceAdapter( PerformanceActivity.this, rounds );
         list.setAdapter( arrayAdapter );
+
     }
+
+
+
+
+
+
 }
