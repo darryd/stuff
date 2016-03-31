@@ -6,11 +6,15 @@ import java.util.Set;
 
 /**
  * Created by Darry on 29/03/16.
+ *
+ *
+ *
+ * Scores are stored as an integer (actual score x 10)
  */
 public class Judges<judge_key_type> {
 
 
-    private HashMap<judge_key_type, Integer> scores = new HashMap<judge_key_type, Integer>();
+    public HashMap<judge_key_type, Integer> scores = new HashMap<judge_key_type, Integer>();
     public boolean doNotIncludeMaxMinScores;
 
     public void setScore(judge_key_type judgeKey, int score) {

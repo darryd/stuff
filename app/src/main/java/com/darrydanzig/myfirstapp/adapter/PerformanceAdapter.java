@@ -70,7 +70,7 @@ public class PerformanceAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             title.setText(round.poet);
 
             for (int i = 0; i < 5; i++) {
-                ((TextView)scoresContainer.getChildAt(i)).setText(String.valueOf(round.scores.get(i)));
+                ((TextView)scoresContainer.getChildAt(i)).setText(String.valueOf(round.judges.scores.get(i)));
             }
         }
 

@@ -31,6 +31,7 @@ import com.koushikdutta.async.http.WebSocket;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.Random;
 import java.util.Set;
 
 import butterknife.Bind;
@@ -58,10 +59,14 @@ public class MyActivity extends AppCompatActivity {
         Log.e(TAG, "2 < 1 : " + comparableMin.compare(2, 1));
         */
 
-        for (int i=0; i<5; i++) {
+        for (int i= 0; i<5; i++) {
 
-            Log.e(TAG, "" + i);
-            judges.setScore("" + i, i);
+            Random random = new Random();
+
+            int value = random.nextInt(5);
+
+            Log.e(TAG, "" + value);
+            judges.setScore("" + i, value);
         }
 
 
@@ -72,8 +77,6 @@ public class MyActivity extends AppCompatActivity {
 
 
     }
-
-    public final static String EXTRA_MESSAGE = "com.darrydanzig.myfirstapp.MESSAGE";
 
     public final static String TAG = "DARRY-TAG";
 
@@ -102,13 +105,13 @@ public class MyActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
 
-        list.setLayoutManager( new LinearLayoutManager( this ) );
+        list.setLayoutManager(new LinearLayoutManager(this));
 
 
 
 
         // Setup socket.
-        //initSocket();
+        initSocket();
         getCompetitions();
 
         experiment();

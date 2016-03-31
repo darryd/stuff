@@ -37,7 +37,7 @@ public class Performance {
     int previousId;
 
     // Scores are stored as an integer (actual score x 10)
-    public HashMap<Integer, Integer> scores = new HashMap<Integer, Integer>();
+    public Judges<Integer> judges = new Judges<Integer>();
     int minutes;
     int seconds;
     int penalty;
@@ -61,7 +61,7 @@ public class Performance {
 
         for (int i1 = 0; i1 < 5; i1++) {
             Random random = new Random();
-            scores.put(i1, random.nextInt(100) );
+            judges.setScore(i1, random.nextInt(100));
         }
     }
 
