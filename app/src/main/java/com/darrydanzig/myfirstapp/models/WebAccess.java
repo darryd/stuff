@@ -32,15 +32,32 @@ import butterknife.ButterKnife;
 public class WebAccess {
 
 
+    private static WebAccess instance = null;
 
     public final String BASE_URL = "https://vanslam.herokuapp.com";
     public final String URL_COMPETITIONS_JSON = BASE_URL + "/welcome/competitions_json";
     public final String URL_COMPETITION_JSON = BASE_URL + "/competition/show?json&id="/*id*/;
     // TODO public final  WHAT_DID_I_MISS_JSON = BASE_URL + "/foobar";
 
+
+    protected WebAccess() {
+
+    }
+
+    public static WebAccess getInstance() {
+
+        if (instance == null)
+            instance = new WebAccess();
+
+        return instance;
+    }
+
     public void experiment() {
 
         Judges<String> judges = new Judges<String>();
+
+
+
 
 
 

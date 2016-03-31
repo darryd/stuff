@@ -36,10 +36,12 @@ public class CompetitionActivity extends Activity {
         setContentView(R.layout.activity_my);
         ButterKnife.bind(this);
 
+
         Round[] rounds = new Round[10];
         for (int i = 0; i < rounds.length; i++) {
             rounds[i] = new Round(i);
         }
+
 
 
         list.setLayoutManager( new LinearLayoutManager( this ) );

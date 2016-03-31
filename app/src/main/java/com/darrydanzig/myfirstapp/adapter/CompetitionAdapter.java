@@ -50,8 +50,8 @@ public class CompetitionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
         private Competition mCompetition;
 
-        @Bind(R.id.id)
-        TextView id;
+        //@Bind(R.id.id)
+        //TextView id;
         @Bind(R.id.title)
         TextView title;
 
@@ -64,7 +64,7 @@ public class CompetitionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         public void bindCompetition(Competition competition) {
             mCompetition = competition;
 
-            id.setText(String.valueOf(competition.id));
+            //id.setText(String.valueOf(competition.id));
             title.setText(competition.title);
         }
 
