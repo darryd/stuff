@@ -47,7 +47,7 @@ public class CompetitionActivity extends Activity {
         list.setAdapter( arrayAdapter );
 
 
-        // HOW DO I GET THE COMPETION CLASS PASSED INTO HERE?
+        // HOW DO I GET THE COMPETITION CLASS PASSED INTO HERE?
         //Log.e(TAG, "id = " + this.id);
     }
 
