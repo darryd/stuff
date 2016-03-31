@@ -45,6 +45,10 @@ public class CompetitionActivity extends Activity {
         list.setLayoutManager( new LinearLayoutManager( this ) );
         RoundAdapter arrayAdapter = new RoundAdapter( CompetitionActivity.this, rounds );
         list.setAdapter( arrayAdapter );
+
+
+        // HOW DO I GET THE COMPETION CLASS PASSED INTO HERE?
+        //Log.e(TAG, "id = " + this.id);
     }
 
     public final static String TAG = "DARRY-TAG";
