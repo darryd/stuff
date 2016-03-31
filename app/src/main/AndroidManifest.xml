@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activities.CompletitionActivity"/>
+        <activity android:name=".activities.CompetitionActivity"/>
 
         <activity android:name=".activities.PerformanceActivity"/>
         <!-- ATTENTION: This was auto-generated to add Google Play services to your project for

@@ -22,7 +22,7 @@ import butterknife.ButterKnife;
 /**
  * Created by Admin on 3/30/2016.
  */
-public class CompletitionActivity extends Activity {
+public class CompetitionActivity extends Activity {
 
     @Bind(R.id.toolbar)
     Toolbar toolbar;
@@ -43,7 +43,7 @@ public class CompletitionActivity extends Activity {
 
 
         list.setLayoutManager( new LinearLayoutManager( this ) );
-        RoundAdapter arrayAdapter = new RoundAdapter( CompletitionActivity.this, rounds );
+        RoundAdapter arrayAdapter = new RoundAdapter( CompetitionActivity.this, rounds );
         list.setAdapter( arrayAdapter );
     }
 

@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.darrydanzig.myfirstapp.models.Competition;
-import com.darrydanzig.myfirstapp.activities.CompletitionActivity;
+import com.darrydanzig.myfirstapp.activities.CompetitionActivity;
 import com.darrydanzig.myfirstapp.R;
 
 import butterknife.Bind;
@@ -71,7 +71,7 @@ public class CompetitionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
         @Override
         public void onClick(View v) {
-            mContext.startActivity(new Intent(mContext, CompletitionActivity.class));
+            mContext.startActivity(new Intent(mContext, CompetitionActivity.class));
         }
     }
 }
