@@ -75,6 +75,7 @@ public class MyActivity extends AppCompatActivity {
         Log.e(TAG, "Total (without max and min) = " + judges.getTotal());
 
 
+
         getCompetition(2);
 
     }
