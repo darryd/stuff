@@ -98,17 +98,12 @@ public class DataStore {
 
             Log.e(TAG, "****************************************************************************");
 
-            //FIXME...THIS IS ALL WRONG
-
-
             Log.e(TAG, fullCompetition.slam.title);
 
             int numberOfRounds = fullCompetition.rounds.length;
             for (int i=0; i<numberOfRounds; i++) {
                 Log.e(TAG, fullCompetition.rounds[i].title);
             }
-
-
 
 
             Log.e(TAG, "****************************************************************************");
