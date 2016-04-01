@@ -1,14 +1,7 @@
 package com.darrydanzig.myfirstapp.models;
 
-import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
-
 import com.darrydanzig.myfirstapp.App;
-import com.darrydanzig.myfirstapp.R;
-import com.darrydanzig.myfirstapp.adapter.CompetitionAdapter;
 import com.koushikdutta.async.ByteBufferList;
 import com.koushikdutta.async.DataEmitter;
 import com.koushikdutta.async.callback.DataCallback;
@@ -20,8 +13,6 @@ import com.koushikdutta.async.http.WebSocket;
 
 import org.json.JSONObject;
 
-import java.util.Random;
-
 /*
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -32,64 +23,10 @@ import butterknife.ButterKnife;
 public class WebAccess {
 
 
-    private static WebAccess instance = null;
-
     public final String BASE_URL = "https://vanslam.herokuapp.com";
     public final String URL_COMPETITIONS_JSON = BASE_URL + "/welcome/competitions_json";
     public final String URL_COMPETITION_JSON = BASE_URL + "/competition/show?json&id="/*id*/;
     // TODO public final  WHAT_DID_I_MISS_JSON = BASE_URL + "/foobar";
-
-
-    protected WebAccess() {
-
-    }
-
-    public static WebAccess getInstance() {
-
-        if (instance == null)
-            instance = new WebAccess();
-
-        return instance;
-    }
-
-    public void experiment() {
-
-        Judges<String> judges = new Judges<String>();
-
-
-
-
-
-
-        Log.e(TAG, "Comparables");
-
-        /*
-        Judges.MyComparable comparableMin = Judges.getMyCompareable(true);
-        Judges.MyComparable comparableMax = Judges.getMyCompareable(false);
-
-        Log.e(TAG, "1 < 2 : " + comparableMin.compare(1, 2));
-        Log.e(TAG, "2 > 1 : " + comparableMax.compare(2, 1));
-
-        Log.e(TAG, "1 > 2 : " + comparableMax.compare(1, 2));
-        Log.e(TAG, "2 < 1 : " + comparableMin.compare(2, 1));
-        */
-
-        for (int i= 0; i<5; i++) {
-
-            Random random = new Random();
-
-            int value = random.nextInt(5);
-
-            Log.e(TAG, "" + value);
-            judges.setScore("" + i, value);
-        }
-
-
-        Log.e(TAG, "Total (with max and min) = " + judges.getTotal());
-        judges.doNotIncludeMaxMinScores = true;
-        Log.e(TAG, "Total (without max and min) = " + judges.getTotal());
-        //getCompetition(2);
-    }
 
     public final static String TAG = "WEB_ACCESS-TAG";
 
@@ -97,19 +34,6 @@ public class WebAccess {
     // Keeping a handle for future use.
     private Future<WebSocket> socket;
 
-    protected void create() {
-
-
-        // Setup socket.
-        initSocket();
-        getCompetitions();
-
-        experiment();
-
-        Performance performance = new Performance();
-        Log.e(TAG, performance.toString());
-
-    }
 
     private void initSocket() {
         AsyncHttpClient instance = AsyncHttpClient.getDefaultInstance();

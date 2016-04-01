@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.darrydanzig.myfirstapp.App;
+import com.darrydanzig.myfirstapp.models.DataStore;
 import com.darrydanzig.myfirstapp.models.Judges;
 import com.darrydanzig.myfirstapp.models.Performance;
 import com.darrydanzig.myfirstapp.R;
@@ -44,7 +45,7 @@ public class MyActivity extends AppCompatActivity {
 
         Judges<String> judges = new Judges<String>();
 
-
+        DataStore dataStore = DataStore.getInstance();
 
         Log.e(TAG, "Comparables");
 
