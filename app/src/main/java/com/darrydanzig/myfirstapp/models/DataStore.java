@@ -1,6 +1,7 @@
 package com.darrydanzig.myfirstapp.models;
 
 
+import android.provider.ContactsContract;
 import android.util.Log;
 
 import com.darrydanzig.myfirstapp.App;
@@ -12,7 +13,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 
 /**
- * Created by aur on 01/04/16.
+ * Created by darry on 01/04/16.
  */
 public class DataStore {
 
@@ -62,6 +63,16 @@ public class DataStore {
 
                 int id = vanSlam.slams[i].id;
                 competitions.put(id, vanSlam.slams[i]);
+
+                Log.e(TAG, "=======================================================================");
+
+
+                Log.e(TAG, vanSlam.slams[i].title);
+
+
+
+
+                Log.e(TAG, "-----------------------------------------------------------------------");
             }
         }
     }
@@ -83,19 +94,43 @@ public class DataStore {
             Log.e(TAG, "I got a JSONObject: " + result.toString());
 
 
-            Competition fullCompetition = App.getInstance().getGson().fromJson(result.toString(), Competition.class);
+            FullCompetition fullCompetition = App.getInstance().getGson().fromJson(result.toString(), FullCompetition.class);
 
-            fullCompetitions.put(fullCompetition.id, fullCompetition);
+            Log.e(TAG, "****************************************************************************");
+
+            //FIXME...THIS IS ALL WRONG
 
 
-            Log.e(TAG, "fullCompetition");
-            Log.e(TAG, fullCompetition.toString());
+            Log.e(TAG, fullCompetition.slam.title);
 
-            Log.e(TAG, "Here's a round");
-            Log.e(TAG, fullCompetition.rounds[0].toString());
+            int numberOfRounds = fullCompetition.rounds.length;
+            for (int i=0; i<numberOfRounds; i++) {
+                Log.e(TAG, fullCompetition.rounds[i].title);
+            }
+
+
+
+
+            Log.e(TAG, "****************************************************************************");
+
+
+
+
+
+
+            //fullCompetitions.put(fullCompetition.id, fullCompetition);
+
+            //DataStore dataStore = DataStore.getInstance();
+
+            /*
+            Log.e(TAG, "---------------------------------------------------------------------");
+            Log.e(TAG, fullCompetition.title);
+            Log.e(TAG, "---------------------------------------------------------------------");
+            //displayCompetion(fullCompetition);
+            */
+
         }
     }
-
 
 
     protected DataStore() {
@@ -115,12 +150,18 @@ public class DataStore {
     }
 
     public void updateCompetition(int id) {
-        webAccess.getCompetition(id,new CompetitionJSONCallBack());
+        webAccess.getCompetition(id, new CompetitionJSONCallBack());
     }
 
     public Competition getCompetition(int id) {
         return null;
     }
 
+    public void displayCompetion(Competition fullCompetition) {
+
+        Log.e(TAG, "----------------------------------------------------------------------------------");
+        Log.e(TAG, fullCompetition.title);
+        Log.e(TAG, "----------------------------------------------------------------------------------");
+    }
 
 }

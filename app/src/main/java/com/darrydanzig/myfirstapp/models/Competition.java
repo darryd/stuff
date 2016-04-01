@@ -46,5 +46,4 @@ public class Competition {
     public String toString() {
         return App.getInstance().getGson().toJson(this, Competition.class);
     }
-
 }
