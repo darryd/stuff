@@ -105,10 +105,7 @@ public class DataStore {
                 Log.e(TAG, fullCompetition.rounds[i].title);
             }
 
-
             Log.e(TAG, "****************************************************************************");
-
-
         }
     }
 

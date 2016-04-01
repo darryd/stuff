@@ -1,5 +1,7 @@
 package com.darrydanzig.myfirstapp.models;
 
+import android.util.Log;
+
 import com.darrydanzig.myfirstapp.App;
 import com.google.gson.annotations.SerializedName;
 
@@ -7,29 +9,14 @@ import com.google.gson.annotations.SerializedName;
  * Created by Darry on 29/03/16.
  */
 
-
-/*
-
-  create_table "competitions", force: :cascade do |t|
-    t.string   "title"
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
-    t.integer  "event_number"
-    t.boolean  "is_closed"
-    t.integer  "num_judges"
-    t.boolean  "do_not_include_min_and_max_scores"
-    t.integer  "organization_id"
-  end
-
- */
-
-
 public class Competition {
 
     public int id;
     public String title;
     int eventNumber;
     int numJudges;
+
+    final public String TAG = "COMPETITION_CLASS";
 
     @SerializedName("do_not_include_min_and_max_scores")
     boolean includeMinMax;
@@ -41,6 +28,18 @@ public class Competition {
         // Default c-tor for gson
     }
 
+
+    public void newPerformance(int performanceId, int prevPerformanceId, String poetName, int roundNumber) {
+
+        //TODO empty for now
+
+        Log.e(TAG, poetName);
+
+    }
+
+    public void newPerformance(int performanceId, String poetName, int roundNumber) {
+        newPerformance(performanceId, 0, poetName, roundNumber);
+    }
 
     @Override
     public String toString() {

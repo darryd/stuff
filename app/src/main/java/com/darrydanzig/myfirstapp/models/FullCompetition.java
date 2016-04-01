@@ -7,5 +7,6 @@ public class FullCompetition {
 
     public Competition slam;
     public Round[] rounds;
+    public Event[] events;
 
 }
