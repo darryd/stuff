@@ -17,6 +17,7 @@ import com.darrydanzig.myfirstapp.models.Performance;
 import com.darrydanzig.myfirstapp.R;
 import com.darrydanzig.myfirstapp.models.VanSlam;
 import com.darrydanzig.myfirstapp.adapter.CompetitionAdapter;
+import com.darrydanzig.myfirstapp.models.WebAccess;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -38,8 +39,33 @@ import java.util.Set;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
+
+
+
+
+
+
+
+
+
 public class MyActivity extends AppCompatActivity {
 
+
+    public class MyJSONCallBack extends AsyncHttpClient.JSONObjectCallback {
+        // Callback is invoked with any exceptions/errors, and the result, if available.
+        @Override
+        public void onCompleted(Exception e, AsyncHttpResponse response, JSONObject result) {
+            if (e != null) {
+                e.printStackTrace();
+                return;
+            }
+            Log.e("experiment", "I got a JSONObject: " + result.toString());
+
+            //final VanSlam competition1 = App.getInstance().getGson().fromJson(result.toString(), VanSlam.class);
+            //Log.d(TAG, competition1.toString());
+
+        }
+    }
 
     public void experiment() {
 
@@ -78,6 +104,12 @@ public class MyActivity extends AppCompatActivity {
 
 
         //getCompetition(2);
+
+
+        MyJSONCallBack mine = new MyJSONCallBack();
+        WebAccess webAccess = new WebAccess();
+        webAccess.getCompetitions(mine);
+
 
     }
 

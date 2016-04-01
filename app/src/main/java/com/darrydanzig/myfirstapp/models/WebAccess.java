@@ -13,10 +13,6 @@ import com.koushikdutta.async.http.WebSocket;
 
 import org.json.JSONObject;
 
-/*
-import butterknife.Bind;
-import butterknife.ButterKnife;
-*/
 /**
  * Created by Darry on 31/03/16.
  */
@@ -47,30 +43,16 @@ public class WebAccess {
         });
     }
 
-    private void getCompetitions() {
+    public void getCompetitions(AsyncHttpClient.JSONObjectCallback jsonCallback) {
 
         // url is the URL to download.
         AsyncHttpGet url = new AsyncHttpGet(URL_COMPETITIONS_JSON);
 
-        AsyncHttpClient.getDefaultInstance().executeJSONObject(url, new AsyncHttpClient.JSONObjectCallback() {
-            // Callback is invoked with any exceptions/errors, and the result, if available.
-            @Override
-            public void onCompleted(Exception e, AsyncHttpResponse response, JSONObject result) {
-                if (e != null) {
-                    e.printStackTrace();
-                    return;
-                }
-                Log.e(TAG, "I got a JSONObject: " + result.toString());
-
-                final VanSlam competition1 = App.getInstance().getGson().fromJson(result.toString(), VanSlam.class);
-                Log.d(TAG, competition1.toString());
-
-            }
-        });
+        AsyncHttpClient.getDefaultInstance().executeJSONObject(url, jsonCallback);
     }
 
 
-    private void getCompetition(int id) {
+    public void getCompetition(int id) {
 
         AsyncHttpGet url = new AsyncHttpGet(URL_COMPETITION_JSON + id);
 
