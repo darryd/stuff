@@ -65,9 +65,11 @@ public class WebAccess {
                     return;
                 }
 
-
                 Log.e(TAG, "Competition json:");
                 Log.e(TAG, result.toString());
+
+
+
             }
         });
     }
