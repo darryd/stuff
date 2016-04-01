@@ -21,7 +21,19 @@ public class DataStore {
     protected static DataStore instance = null;
     private WebAccess webAccess = new WebAccess();
 
+    /*
+
+
+    competitions
+        - We download this to find out all the competitions
+        - is data from BACE_URL/welcome/competitions_json
+    fullCompetitions
+        - We download this to view the competition (so it naturally contains more infomation)
+        - is data from BASE_URL/competitions/show?json&id={id}
+
+     */
     public HashMap<Integer, Competition> competitions = new HashMap<Integer, Competition>();
+    public HashMap<Integer, Competition> fullCompetitions = new HashMap<Integer, Competition>();
 
     /*
 
@@ -54,6 +66,38 @@ public class DataStore {
         }
     }
 
+    /*
+
+    Get additional information
+
+
+    */
+    public class CompetitionJSONCallBack extends AsyncHttpClient.JSONObjectCallback {
+        // Callback is invoked with any exceptions/errors, and the result, if available.
+        @Override
+        public void onCompleted(Exception e, AsyncHttpResponse response, JSONObject result) {
+            if (e != null) {
+                e.printStackTrace();
+                return;
+            }
+            Log.e(TAG, "I got a JSONObject: " + result.toString());
+
+
+            Competition fullCompetition = App.getInstance().getGson().fromJson(result.toString(), Competition.class);
+
+            fullCompetitions.put(fullCompetition.id, fullCompetition);
+
+
+            Log.e(TAG, "fullCompetition");
+            Log.e(TAG, fullCompetition.toString());
+
+            Log.e(TAG, "Here's a round");
+            Log.e(TAG, fullCompetition.rounds[0].toString());
+        }
+    }
+
+
+
     protected DataStore() {
         updateCompetitions();
     }
@@ -68,6 +112,10 @@ public class DataStore {
 
     public void updateCompetitions() {
         webAccess.getCompetitions(new CompetitionsJSONCallBack());
+    }
+
+    public void updateCompetition(int id) {
+        webAccess.getCompetition(id,new CompetitionJSONCallBack());
     }
 
     public Competition getCompetition(int id) {

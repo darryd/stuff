@@ -110,6 +110,8 @@ public class MyActivity extends AppCompatActivity {
         WebAccess webAccess = new WebAccess();
         webAccess.getCompetitions(mine);
 
+        dataStore.updateCompetition(2);
+
     }
 
     public final static String TAG = "DARRY-TAG";
