@@ -45,33 +45,16 @@ public class WebAccess {
 
     public void getCompetitions(AsyncHttpClient.JSONObjectCallback jsonCallback) {
 
-        // url is the URL to download.
         AsyncHttpGet url = new AsyncHttpGet(URL_COMPETITIONS_JSON);
-
         AsyncHttpClient.getDefaultInstance().executeJSONObject(url, jsonCallback);
     }
 
 
-    public void getCompetition(int id) {
+    public void getCompetition(int id, AsyncHttpClient.JSONObjectCallback jsonObjectCallback) {
 
         AsyncHttpGet url = new AsyncHttpGet(URL_COMPETITION_JSON + id);
+        AsyncHttpClient.getDefaultInstance().executeJSONObject(url, jsonObjectCallback);
 
-        AsyncHttpClient.getDefaultInstance().executeJSONObject(url, new AsyncHttpClient.JSONObjectCallback() {
-            @Override
-            public void onCompleted(Exception e, AsyncHttpResponse source, JSONObject result) {
-                if (e != null) {
-                    e.printStackTrace();
-                    Log.e(TAG, "Exeception onCompleted. " + e.getMessage());
-                    return;
-                }
-
-                Log.e(TAG, "Competition json:");
-                Log.e(TAG, result.toString());
-
-
-
-            }
-        });
     }
 
     // TODO

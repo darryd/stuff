@@ -39,11 +39,6 @@ public class Competition {
     public Competition() {
         super();
         // Default c-tor for gson
-
-        rounds = new Round[10];
-        for (int i = 0; i < 10; i++) {
-            rounds[i] = new Round();
-        }
     }
 
 

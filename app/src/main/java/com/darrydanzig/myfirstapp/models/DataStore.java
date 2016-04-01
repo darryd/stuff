@@ -51,9 +51,6 @@ public class DataStore {
                 int id = vanSlam.slams[i].id;
                 competitions.put(id, vanSlam.slams[i]);
             }
-
-            Log.e(TAG, "competitions HashMap");
-            Log.e(TAG, competitions.toString());
         }
     }
 
