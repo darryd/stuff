@@ -49,7 +49,7 @@ public class DataStore {
     }
 
     public void updateCompetitions() {
-
+        webAccess.getCompetitions(new CompetitionsJSONCallBack());
     }
 
     public Competition getCompetition(int id) {
