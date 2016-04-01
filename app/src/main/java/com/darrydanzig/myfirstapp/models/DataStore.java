@@ -109,21 +109,6 @@ public class DataStore {
             Log.e(TAG, "****************************************************************************");
 
 
-
-
-
-
-            //fullCompetitions.put(fullCompetition.id, fullCompetition);
-
-            //DataStore dataStore = DataStore.getInstance();
-
-            /*
-            Log.e(TAG, "---------------------------------------------------------------------");
-            Log.e(TAG, fullCompetition.title);
-            Log.e(TAG, "---------------------------------------------------------------------");
-            //displayCompetion(fullCompetition);
-            */
-
         }
     }
 
@@ -154,9 +139,7 @@ public class DataStore {
 
     public void displayCompetion(Competition fullCompetition) {
 
-        Log.e(TAG, "----------------------------------------------------------------------------------");
-        Log.e(TAG, fullCompetition.title);
-        Log.e(TAG, "----------------------------------------------------------------------------------");
+
     }
 
 }
