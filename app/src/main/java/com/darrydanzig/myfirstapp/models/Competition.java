@@ -5,6 +5,8 @@ import android.util.Log;
 import com.darrydanzig.myfirstapp.App;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.HashMap;
+
 /**
  * Created by Darry on 29/03/16.
  */
@@ -22,6 +24,8 @@ public class Competition {
     boolean includeMinMax;
 
     Round[] rounds;
+
+    HashMap<Integer, Integer> PerformanceIdToRoundId = new HashMap<Integer, Integer>();
 
     public Competition() {
         super();
@@ -48,6 +52,11 @@ public class Competition {
     public void penalty(int performanceId, float value) {
         Log.e(TAG, "Penalty: " + value);
     }
+
+    public void penalty(int performanceId) {
+        Log.e(TAG, "Remove performance: " + performanceId);
+    }
+
 
     @Override
     public String toString() {
