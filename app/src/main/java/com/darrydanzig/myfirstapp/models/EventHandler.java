@@ -29,18 +29,23 @@ public class EventHandler {
 
                 case "new_performance":
 
+                    competition.newPerformance(event.performanceId, event.previousPerformanceId,
+                            event.poetName, event.roundNumber);
                     break;
 
                 case "judge":
 
+                    competition.judge(event.performanceId, event.judgeName, event.value);
                     break;
 
                 case "set_time":
 
+                    competition.set_time(event.performanceId, event.minutes, event.seconds);
                     break;
 
                 case "penalty":
 
+                    competition.penalty(event.performanceId, event.value);
                     break;
 
             }
