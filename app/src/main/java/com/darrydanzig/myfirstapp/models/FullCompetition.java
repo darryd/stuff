@@ -10,12 +10,14 @@ public class FullCompetition {
     public Event[] events;
     public EventHandler eventHandler;
 
-    private boolean processEventsHasCalled;
+    private boolean processEventsHasBeenCalled;
 
     public void processEvents() {
 
-        if (processEventsHasCalled)
+        if (processEventsHasBeenCalled)
             return;
+        else
+            processEventsHasBeenCalled = true;
 
         eventHandler = new EventHandler();
         eventHandler.setCompetition(slam);
