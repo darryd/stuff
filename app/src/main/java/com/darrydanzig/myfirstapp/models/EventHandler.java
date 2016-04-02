@@ -7,11 +7,13 @@ import java.util.HashMap;
  */
 public class EventHandler {
 
-    public Competition competition;
+    private Competition competition;
+    private HashMap<Integer, Event> unprocessedEvents = new HashMap<Integer, Event>();
+    private int eventNumber;
 
-    public HashMap<Integer, Event> unprocessedEvents;
-
-    public int eventNumber = 0;
+    public void setCompetition(Competition competition) {
+        this.competition = competition;
+    }
 
     public void processEvent(Event event) {
 
@@ -19,7 +21,10 @@ public class EventHandler {
             return;
 
         else if (eventNumber + 1 != event.eventNumber) {
-            unprocessedEvents.put(event.eventNumber, event);
+
+            if (event.eventNumber > eventNumber + 1)
+                unprocessedEvents.put(event.eventNumber, event);
+
             return;
         }
         else {
