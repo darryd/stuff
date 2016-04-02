@@ -37,8 +37,16 @@ public class Competition {
 
     }
 
-    public void newPerformance(int performanceId, String poetName, int roundNumber) {
-        newPerformance(performanceId, 0, poetName, roundNumber);
+    public void judge(int performanceId, String judgeName, float value) {
+        Log.e(TAG, judgeName + ": " + value);
+    }
+
+    public void set_time(int performanceId, int minutes, int seconds) {
+        Log.e(TAG, "Time: " + minutes + ":" + seconds);
+    }
+
+    public void penalty(int performanceId, float value) {
+        Log.e(TAG, "Penalty: " + value);
     }
 
     @Override
