@@ -19,7 +19,7 @@ public class Event {
 
     /*
 
-    event = performance
+    event = new_performance
 
      */
 

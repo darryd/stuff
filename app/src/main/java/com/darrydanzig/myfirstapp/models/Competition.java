@@ -14,6 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.HashMap;
 
 /**
  * Created by Darry on 29/03/16.
@@ -35,6 +36,8 @@ public class Competition implements Serializable {
 
     public Round[] rounds = new Round[0];
 
+    HashMap<Integer, Integer> PerformanceIdToRoundId = new HashMap<Integer, Integer>();
+
     public Competition() {
         super();
         // Default c-tor for gson
@@ -49,9 +52,22 @@ public class Competition implements Serializable {
 
     }
 
-    public void newPerformance(int performanceId, String poetName, int roundNumber) {
-        newPerformance(performanceId, 0, poetName, roundNumber);
+    public void judge(int performanceId, String judgeName, float value) {
+        Log.e(TAG, judgeName + ": " + value);
     }
+
+    public void set_time(int performanceId, int minutes, int seconds) {
+        Log.e(TAG, "Time: " + minutes + ":" + seconds);
+    }
+
+    public void penalty(int performanceId, float value) {
+        Log.e(TAG, "Penalty: " + value);
+    }
+
+    public void penalty(int performanceId) {
+        Log.e(TAG, "Remove performance: " + performanceId);
+    }
+
 
     @Override
     public String toString() {
