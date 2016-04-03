@@ -2,7 +2,9 @@ package com.darrydanzig.myfirstapp.models;
 
 import com.darrydanzig.myfirstapp.App;
 
+import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Darry on 29/03/16.
@@ -26,7 +28,7 @@ import java.util.HashMap;
   end
 
  */
-public class Round {
+public class Round implements Serializable, Comparable<Round> {
 
     public int id;
     public int roundNumber;
@@ -39,28 +41,54 @@ public class Round {
     int graceTime;
     int numPlaces;
 
-    private HashMap<Integer, Performance> performances;
-
-    public Round() {
-        super();
-
-
-    }
-
-    public Round(int i) {
-        performances = new HashMap<>();
-
-        for (int t = 0; t < i; t++) {
-            performances.put(i, new Performance(i));
-        }
-
-        id = i;
-        title = "Round " + ( i + 1 );
-    }
+    public HashMap<Integer, Performance> performances = new HashMap<>();
+    private int victor;
 
     @Override
     public String toString() {
         return App.getInstance().getGson().toJson(this, Round.class);
     }
 
+    @Override
+    public int compareTo(Round another) {
+        if (id < another.id)
+            return 1;
+
+        if (id == another.id)
+            return 0;
+
+        return -1;
+    }
+
+    public void addPerformance(Event event) {
+        Performance value = new Performance();
+        value.poet = event.poetName;
+        value.id = event.performanceId;
+
+        performances.put(event.performanceId, value);
+    }
+
+    public void addJudgeScore(Event event) {
+        try {
+            Performance performance = performances.get(event.performanceId);
+            performance.addScore((int) (event.value * 10));
+        } catch (Exception ex) {
+        }
+    }
+
+    public String getVictor() {
+        String victor = "";
+
+        Performance currentVictor = null;
+
+        for (Map.Entry<Integer, Performance> integerPerformanceEntry : performances.entrySet()) {
+            Performance value = integerPerformanceEntry.getValue();
+            if( currentVictor == null || value.total > currentVictor.total ) {
+                currentVictor = value;
+                victor = currentVictor.poet;
+            }
+        }
+
+        return victor;
+    }
 }

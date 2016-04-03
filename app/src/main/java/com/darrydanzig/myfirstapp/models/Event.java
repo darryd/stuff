@@ -1,5 +1,7 @@
 package com.darrydanzig.myfirstapp.models;
 
+import com.darrydanzig.myfirstapp.App;
+
 /**
  * Created by darry on 01/04/16.
  */
@@ -61,4 +63,8 @@ public class Event {
     // performanceId (already defined)
 
 
+    @Override
+    public String toString() {
+        return App.getInstance().getGson().toJson(this, Event.class);
+    }
 }

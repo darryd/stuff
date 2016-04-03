@@ -1,23 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical" android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:padding="20dp">
+    android:layout_weight="1">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/title"
-        android:textSize="30sp"
-        android:singleLine="false"
-        style="@style/TextStyle.Highlight" />
+        android:text="Judge"
+        android:id="@+id/name"
+        android:layout_gravity="center_horizontal" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/date"
-        android:textSize="19sp" />
-
+        android:text="7.5"
+        android:id="@+id/value"
+        android:layout_gravity="center_horizontal" />
 </LinearLayout>

@@ -1,10 +1,12 @@
-package com.darrydanzig.myfirstapp.models;
+package com.darrydanzig.myfirstapp.network;
 
 
-import android.provider.ContactsContract;
 import android.util.Log;
 
 import com.darrydanzig.myfirstapp.App;
+import com.darrydanzig.myfirstapp.models.Competition;
+import com.darrydanzig.myfirstapp.models.FullCompetition;
+import com.darrydanzig.myfirstapp.models.VanSlam;
 import com.koushikdutta.async.http.AsyncHttpClient;
 import com.koushikdutta.async.http.AsyncHttpResponse;
 
@@ -21,6 +23,8 @@ public class DataStore {
 
     protected static DataStore instance = null;
     private WebAccess webAccess = new WebAccess();
+
+    public static VanSlam vanSlam;
 
     /*
 
@@ -51,29 +55,29 @@ public class DataStore {
                 e.printStackTrace();
                 return;
             }
-            Log.e(TAG, "I got a JSONObject: " + result.toString());
+//            Log.e(TAG, "I got a JSONObject: " + result.toString());
 
 
-            final VanSlam vanSlam = App.getInstance().getGson().fromJson(result.toString(), VanSlam.class);
-            Log.e(TAG, "Number of Competitions = " + vanSlam.slams.length);
-
-
-            int numberOfCompetitions = vanSlam.slams.length;
-            for (int i=0; i<numberOfCompetitions; i++) {
-
-                int id = vanSlam.slams[i].id;
-                competitions.put(id, vanSlam.slams[i]);
-
-                Log.e(TAG, "=======================================================================");
-
-
-                Log.e(TAG, vanSlam.slams[i].title);
-
-
-
-
-                Log.e(TAG, "-----------------------------------------------------------------------");
-            }
+            //vanSlam = App.getInstance().getGson().fromJson(result.toString(), VanSlam.class);
+//            Log.e(TAG, "Number of Competitions = " + vanSlam.slams.length);
+//
+//
+//            int numberOfCompetitions = vanSlam.slams.length;
+//            for (int i=0; i<numberOfCompetitions; i++) {
+//
+//                int id = vanSlam.slams[i].id;
+//                competitions.put(id, vanSlam.slams[i]);
+//
+//                Log.e(TAG, "=======================================================================");
+//
+//
+//                Log.e(TAG, vanSlam.slams[i].title);
+//
+//
+//
+//
+//                Log.e(TAG, "-----------------------------------------------------------------------");
+//            }
         }
     }
 
@@ -91,21 +95,31 @@ public class DataStore {
                 e.printStackTrace();
                 return;
             }
-            Log.e(TAG, "I got a JSONObject: " + result.toString());
+//            Log.e(TAG, "I got a JSONObject: " + result.toString());
 
 
             FullCompetition fullCompetition = App.getInstance().getGson().fromJson(result.toString(), FullCompetition.class);
+            //Log.e(TAG, fullCompetition.toString());
 
-            Log.e(TAG, "****************************************************************************");
-
-            Log.e(TAG, fullCompetition.slam.title);
-
-            int numberOfRounds = fullCompetition.rounds.length;
-            for (int i=0; i<numberOfRounds; i++) {
-                Log.e(TAG, fullCompetition.rounds[i].title);
+            if( vanSlam != null ) {
+                Log.e(TAG, "VanSlam is not null, merging the full details in.");
+                vanSlam.merge( fullCompetition );
+            } else {
+                Log.e(TAG, "VanSlam is NULL. Cannot merge.");
             }
 
-            Log.e(TAG, "****************************************************************************");
+//
+//
+//            Log.e(TAG, "****************************************************************************");
+//
+//            Log.e(TAG, fullCompetition.slam.title);
+//
+//            int numberOfRounds = fullCompetition.rounds.length;
+//            for (int i=0; i<numberOfRounds; i++) {
+//                Log.e(TAG, fullCompetition.rounds[i].title);
+//            }
+//
+//            /Log.e(TAG, "****************************************************************************");
         }
     }
 

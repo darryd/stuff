@@ -1,8 +1,13 @@
 package com.darrydanzig.myfirstapp.models;
 
+import android.annotation.SuppressLint;
+import android.util.Log;
+
 import com.darrydanzig.myfirstapp.App;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
@@ -27,7 +32,7 @@ import java.util.Random;
 
 
  */
-public class Performance {
+public class Performance implements Serializable {
 
     public int id;
     public String poet;
@@ -36,15 +41,18 @@ public class Performance {
     @SerializedName("previous_performance_id")
     int previousId;
 
+
+    public ArrayList<Integer> scores = new ArrayList<>();
+
     // Scores are stored as an integer (actual score x 10)
-    public Judges<Integer> judges = new Judges<Integer>();
+    //public Judges<Integer> judges = new Judges<Integer>();
     int minutes;
     int seconds;
     int penalty;
     Performance prev; // From another round (sometimes scores are cumulative)
 
     // total and subtotal are ints (actual total x 10)
-    int total;
+    public float total = 0;
     int subtotal;
     public int rank;
     List<String> tiedWith;
@@ -61,12 +69,46 @@ public class Performance {
 
         for (int i1 = 0; i1 < 5; i1++) {
             Random random = new Random();
-            judges.setScore(i1, random.nextInt(100));
+            //judges.setScore(i1, random.nextInt(100));
         }
+    }
+
+    public void addScore( int score ) {
+        scores.add(score);
+        Log.d("Performance", "Adding score " + poet + "-->" + score + " total length: " + scores.size());
+
+        total += (float)score / 10;
     }
 
     @Override
     public String toString() {
         return App.getInstance().getGson().toJson(this, Performance.class);
+    }
+
+    @SuppressLint("DefaultLocale")
+    public String getTotal() {
+        return  String.format("%.1f", total);
+    }
+
+    public int getMin() {
+        int min = scores.get(0);
+
+        for (Integer score : scores) {
+            if( score < min )
+                min = score;
+        }
+
+        return min;
+    }
+
+    public int getMax() {
+        int max = scores.get(0);
+
+        for (Integer score : scores) {
+            if( score > max )
+                max = score;
+        }
+
+        return max;
     }
 }

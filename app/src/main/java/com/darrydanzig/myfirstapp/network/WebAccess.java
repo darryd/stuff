@@ -1,4 +1,4 @@
-package com.darrydanzig.myfirstapp.models;
+package com.darrydanzig.myfirstapp.network;
 
 import android.util.Log;
 import com.koushikdutta.async.ByteBufferList;

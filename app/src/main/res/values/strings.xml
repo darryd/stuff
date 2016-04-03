@@ -1,12 +1,7 @@
 <resources>
-    <string name="app_name">My First App</string>
-    <string name="edit_message">Enter a message</string>
-    <string name="button_send">Send</string>
-    <string name="action_settings">Settings</string>
-    <string name="you_pressed_send">You really did press send. I\'m proud of you!</string>
-    <string name="title_activity_display_message">My Message</string>
-
+    <string name="app_name">Vancouver Slam</string>
 
     <string name="BASE_URL">https://vanslam.herokuapp.com</string>
     <string name="URL_COMPETITIONS_JSON">https://vanslamlive.ca/welcome/competitions_json</string>
+    <string name="action_settings">Settings</string>
 </resources>

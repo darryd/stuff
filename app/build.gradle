@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.darrydanzig.myfirstapp"
-        minSdkVersion 9
+        minSdkVersion 10
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -24,13 +24,21 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.2.1'
     compile 'com.android.support:design:23.2.1'
+
+    // Networking
     compile 'com.koushikdutta.async:androidasync:2.+'
 
 
     // Butterknife for injection.
     compile 'com.jakewharton:butterknife:7.0.1'
+    // Generic Renders for Lists
+    compile 'com.github.Shyish:GenericRenderers:1.0'
+
+    // TODO: Is this required?
     compile 'com.google.android.gms:play-services-appindexing:8.1.0'
 
     // Gson for JSON parsing.
     compile files('libs/gson-2.6.2.jar')
+
+
 }

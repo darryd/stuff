@@ -1,26 +1,22 @@
 package com.darrydanzig.myfirstapp.activities;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 
 import com.darrydanzig.myfirstapp.App;
-import com.darrydanzig.myfirstapp.models.DataStore;
+import com.darrydanzig.myfirstapp.adapter.CompetitionRenderer;
+import com.darrydanzig.myfirstapp.models.Competition;
+import com.darrydanzig.myfirstapp.network.DataStore;
 import com.darrydanzig.myfirstapp.models.Judges;
-import com.darrydanzig.myfirstapp.models.Performance;
 import com.darrydanzig.myfirstapp.R;
+import com.darrydanzig.myfirstapp.models.Round;
 import com.darrydanzig.myfirstapp.models.VanSlam;
-import com.darrydanzig.myfirstapp.adapter.CompetitionAdapter;
-import com.darrydanzig.myfirstapp.models.WebAccess;
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
+import com.darrydanzig.myfirstapp.network.WebAccess;
+import com.google.gson.Gson;
 import com.koushikdutta.async.ByteBufferList;
 import com.koushikdutta.async.DataEmitter;
 import com.koushikdutta.async.callback.DataCallback;
@@ -29,24 +25,17 @@ import com.koushikdutta.async.http.AsyncHttpClient;
 import com.koushikdutta.async.http.AsyncHttpGet;
 import com.koushikdutta.async.http.AsyncHttpResponse;
 import com.koushikdutta.async.http.WebSocket;
+import com.pedrogomez.renderers.RendererAdapter;
+import com.pedrogomez.renderers.RendererBuilder;
 
 import org.json.JSONObject;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
-import java.util.Set;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-
-
-
-
-
-
-
-
-
 
 public class MyActivity extends AppCompatActivity {
 
@@ -59,7 +48,14 @@ public class MyActivity extends AppCompatActivity {
                 e.printStackTrace();
                 return;
             }
-            Log.e("experiment", "I got a JSONObject: " + result.toString());
+           // Log.e("experiment", "I got a JSONObject: " + result.toString());
+
+            if( DataStore.vanSlam == null ) {
+                DataStore.vanSlam =  App.getInstance().getGson().fromJson(result.toString(), VanSlam.class);
+                setupCompetitionsAdapter(DataStore.vanSlam);
+            } else {
+                DataStore.vanSlam.updateSlam(result.toString());
+            }
 
             //final VanSlam competition1 = App.getInstance().getGson().fromJson(result.toString(), VanSlam.class);
             //Log.d(TAG, competition1.toString());
@@ -110,7 +106,7 @@ public class MyActivity extends AppCompatActivity {
         WebAccess webAccess = new WebAccess();
         webAccess.getCompetitions(mine);
 
-        dataStore.updateCompetition(2);
+        dataStore.updateCompetition(46);
     }
 
     public final static String TAG = "DARRY-TAG";
@@ -141,13 +137,9 @@ public class MyActivity extends AppCompatActivity {
 
         // Setup socket.
         initSocket();
-        getCompetitions();
+        //getCompetitions();
 
         experiment();
-
-        Performance performance = new Performance();
-        Log.e(TAG, performance.toString());
-
     }
 
     private void initSocket() {
@@ -184,26 +176,35 @@ public class MyActivity extends AppCompatActivity {
                     e.printStackTrace();
                     return;
                 }
+
+
+                Gson gson = App.getInstance().getGson();
+
+                //Log.e(TAG, "")
+
                 Log.e(TAG, "I got a JSONObject: " + result.toString());
 
-                final VanSlam competition1 = App.getInstance().getGson().fromJson(result.toString(), VanSlam.class);
-                Log.d(TAG, competition1.toString());
+                DataStore.vanSlam = gson.fromJson(result.toString(), VanSlam.class);
+                Log.d(TAG, DataStore.vanSlam.toString());
 
-                MyActivity.this.runOnUiThread(new Runnable() {
-                    public void run() {
-                        Log.d("UI thread", "I am the UI thread");
-                        CompetitionAdapter arrayAdapter = new CompetitionAdapter( MyActivity.this, competition1.slams );
-                        list.setAdapter( arrayAdapter );
-                    }
-                });
-
-
+                setupCompetitionsAdapter(DataStore.vanSlam);
             }
         });
 
 
     }
 
+    private void setupCompetitionsAdapter(final VanSlam vanSlam) {
+        MyActivity.this.runOnUiThread(new Runnable() {
+            public void run() {
+                ArrayList<Competition> competitions = new ArrayList<Competition>();
+                Collections.addAll(competitions, vanSlam.slams);
+
+                RendererBuilder<Round> rendererBuilder = new RendererBuilder<>(new CompetitionRenderer());
+                list.setAdapter(new RendererAdapter<>(rendererBuilder, competitions));
+            }
+        });
+    }
 
 
     private void onSocketCompleted(Exception ex, WebSocket webSocket) {
@@ -217,7 +218,7 @@ public class MyActivity extends AppCompatActivity {
         webSocket.setStringCallback(new WebSocket.StringCallback() {
             @Override
             public void onStringAvailable(String s) {
-                Log.e(TAG, s);
+                Log.e(TAG, "onSocketCompleted:StringCallback - " + s);
             }
         });
         webSocket.setDataCallback(new DataCallback() {
