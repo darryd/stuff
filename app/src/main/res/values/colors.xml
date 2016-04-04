@@ -2,7 +2,7 @@
 <resources>
 
     <color name="white">@android:color/white</color>
-    <color name="background">#222222</color>
+    <color name="background">#f6f6f6</color>
     <color name="background_dark">#111111</color>
 
     <color name="score_high">#f2f05e</color>

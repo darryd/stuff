@@ -33,16 +33,15 @@ public class Round implements Serializable, Comparable<Round> {
     public int id;
     public int roundNumber;
     public String title;
-    int competitionId;
-    int numPoets;
-    boolean isCumulative;
-    boolean arePoetsFromPrevious;
-    int timeLimit;
-    int graceTime;
-    int numPlaces;
+    public int competitionId;
+    public int numPoets;
+    public boolean isCumulative;
+    public boolean arePoetsFromPrevious;
+    public int timeLimit;
+    public int graceTime;
+    public int numPlaces;
 
     public HashMap<Integer, Performance> performances = new HashMap<>();
-    private int victor;
 
     @Override
     public String toString() {

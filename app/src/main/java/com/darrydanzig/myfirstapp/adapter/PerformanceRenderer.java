@@ -68,7 +68,9 @@ public class PerformanceRenderer extends Renderer<Performance> {
         if( performance.total > 45 ) {
             icon.setImageDrawable(getContext().getResources().getDrawable(R.drawable.star_gold));
         } else if ( performance.total > 44 ) {
-            icon.setImageDrawable(getContext().getResources().getDrawable(R.drawable.star_white));
+            icon.setImageDrawable(getContext().getResources().getDrawable(R.drawable.star_silver));
+        } else if (performance.total > 43) {
+            icon.setImageDrawable(getContext().getResources().getDrawable(R.drawable.star_brozne));
         } else {
             icon.setImageDrawable(null);
         }
